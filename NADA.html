@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>...</title>
+
+  <style>
+    body {
+      background-color: #000;
+      color: #e5e5e5;
+      font-family: monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 20vh;
+    }
+
+    button {
+      background: none;
+      border: 1px solid #555;
+      color: #e5e5e5;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-family: monospace;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #111;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .small {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <p id="text">você não precisava estar aqui.</p>
+
+    <button id="btn">continuar mesmo assim</button>
+
+    <p id="result" class="hidden"></p>
+
+    <p class="small" id="counter"></p>
+  </div>
+
+  <script>
+    // contador de visitas fake (assusta o povo)
+    let visits = localStorage.getItem("visits");
+
+    if (!visits) {
+      visits = 1;
+    } else {
+      visits = parseInt(visits) + 1;
+    }
+
+    localStorage.setItem("visits", visits);
+    document.getElementById("counter").innerText =
+      "você já esteve aqui " + visits + " vez(es).";
+
+    const btn = document.getElementById("btn");
+    const text = document.getElementById("text");
+    const result = document.getElementById("result");
+
+    btn.addEventListener("click", () => {
+      btn.style.display = "none";
+      text.innerText = "ok.";
+
+      setTimeout(() => {
+        result.classList.remove("hidden");
+        result.innerText = "não aconteceu nada.";
+      }, 2000);
+    });
+  </script>
+
+</body>
+</html>
